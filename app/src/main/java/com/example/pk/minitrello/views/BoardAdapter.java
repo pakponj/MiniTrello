@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.Board;
 
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class BoardAdapter extends ArrayAdapter<Board> {
         TextView body = (TextView) v.findViewById(R.id.body);
 
         Board board = getItem(position);
-        subject.setText(board.getSubject());
-        body.setText(board.getBody());
+        subject.setText(board.getName());
+        body.setText(board.getDesc());
 
         return v;
     }

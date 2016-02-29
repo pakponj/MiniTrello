@@ -17,6 +17,14 @@ public class MiniTrelloContainers<T> {
         this.desc = desc;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDesc() {
+        return this.desc;
+    }
+
     public void add(T child){
         children.add(child);
     }

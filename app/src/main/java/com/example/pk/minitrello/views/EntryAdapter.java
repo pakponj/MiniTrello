@@ -8,11 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.ListEntry;
 
 import java.util.List;
 
-public class EntryAdapter extends ArrayAdapter<Entry> {
-    public EntryAdapter(Context context, int resource, List<Entry> objects) {
+public class EntryAdapter extends ArrayAdapter<ListEntry> {
+    public EntryAdapter(Context context, int resource, List<ListEntry> objects) {
         super(context, resource, objects);
     }
 
@@ -29,9 +30,9 @@ public class EntryAdapter extends ArrayAdapter<Entry> {
         TextView subject = (TextView) v.findViewById(R.id.subject);
         TextView body = (TextView) v.findViewById(R.id.body);
 
-        Entry entry = getItem(position);
-        subject.setText(entry.getSubject());
-        body.setText(entry.getBody());
+        ListEntry entry = getItem(position);
+        subject.setText(entry.getName());
+        body.setText(entry.getDesc());
 
         return v;
     }

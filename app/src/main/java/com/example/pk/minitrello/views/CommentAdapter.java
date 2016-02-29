@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.Comment;
 
-import org.w3c.dom.Comment;
 
 import java.util.List;
 

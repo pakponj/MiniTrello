@@ -8,7 +8,18 @@ public class Comment {
     private String body;
     private long createdTime;
 
-    public Comment(){
+    public String getSubject() {
+        return this.subject;
+    }
+
+    public String getBody() {
+        return this.body;
+    }
+
+    public Comment( String subject , String body){
+        this.subject = subject;
+        this.body = body;
+        createdTime = System.currentTimeMillis();
 
     }
 }

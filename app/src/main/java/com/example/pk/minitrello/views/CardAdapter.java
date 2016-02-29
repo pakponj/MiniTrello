@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.Card;
+
+import java.util.List;
 
 public class CardAdapter extends ArrayAdapter<Card> {
     public CardAdapter(Context context, int resource, List<Card> objects) {
@@ -28,8 +31,8 @@ public class CardAdapter extends ArrayAdapter<Card> {
         TextView body = (TextView) v.findViewById(R.id.body);
 
         Card card = getItem(position);
-        subject.setText(card.getSubject());
-        body.setText(card.getBody());
+        subject.setText(card.getName());
+        body.setText(card.getDesc());
 
         return v;
     }
