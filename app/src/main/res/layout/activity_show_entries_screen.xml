@@ -30,6 +30,7 @@
 
     <ListView
         android:id="@+id/entry_list"
+        android:layout_below="@+id/entry_board_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 

@@ -25,6 +25,7 @@ public class ShowEntryScreen extends AppCompatActivity {
     private ListView entryListView;
     private EntryAdapter entryAdapter;
     private Board board;
+    int boardIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,8 @@ public class ShowEntryScreen extends AppCompatActivity {
     {
         TextView entryBoardName = (TextView) findViewById(R.id.entry_board_name);
         TextView entryBoardDesc = (TextView) findViewById(R.id.entry_board_desc);
-        board = (Board) getIntent().getSerializableExtra("board");
+        boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
+        board = Storage.getInstance().getBoards().get(boardIndex);
         entryBoardName.setText(board.getName());
         entryBoardDesc.setText(board.getDesc());
         Button deleteButton = (Button) findViewById(R.id.delete_all_button);
@@ -55,7 +57,9 @@ public class ShowEntryScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ShowEntryScreen.this, CreateEntryScreen.class);
-                intent.putExtra("add_in_this_board",board);
+//                boardIndex = Storage.getInstance().getBoards().indexOf(board);
+//                Log.e("Index #", boardIndex+"");
+                intent.putExtra("add_in_this_board",boardIndex);
                 startActivity(intent);
             }
         });
@@ -77,7 +81,10 @@ public class ShowEntryScreen extends AppCompatActivity {
 
     private void refreshEntries() {
         entryList.clear();
-        for(ListEntry e : board.getChildren()) {
+//        Log.e("Board HashCode: ", board.hashCode()+"");
+//        Log.e("Empty Board", board.getChildren().isEmpty()+"");
+        for(ListEntry e : Storage.getInstance().getBoards().get(boardIndex).getChildren()) {
+//            Log.e("ListEntry", e.getName());
             entryList.add(e);
         }
         entryAdapter.notifyDataSetChanged();

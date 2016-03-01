@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.pk.minitrello.R;
-import com.example.pk.minitrello.models.Board;
 import com.example.pk.minitrello.models.ListEntry;
 import com.example.pk.minitrello.models.Storage;
 
@@ -16,7 +15,7 @@ public class CreateEntryScreen extends AppCompatActivity {
 
     private String entryName;
     private String entryDesc;
-    private Board board;
+    private int boardIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,9 @@ public class CreateEntryScreen extends AppCompatActivity {
                 EditText description = (EditText) findViewById(R.id.entry_desc);
                 entryDesc = description.getText().toString();
                 //TODO Code for putExtra
-                board = (Board) getIntent().getSerializableExtra("add_in_this_board");
+                boardIndex = (Integer) getIntent().getSerializableExtra("add_in_this_board");
+                Log.e("Index #", boardIndex + "");
+//  Log.e("Board HashCode: ", board.hashCode()+"");
                 //TODO fill entry
 //                Intent intent = new Intent(CreateEntryScreen.this, ShowEntryScreen.class);
 //                startActivity(intent);
@@ -46,8 +47,8 @@ public class CreateEntryScreen extends AppCompatActivity {
 
     private void saveNewEntry() {
         ListEntry temp = new ListEntry(entryName, entryDesc);
-        Log.e("SaveEntry", temp.getName());
-        Storage.getInstance().addListEntry(temp);
-        board.add(temp);
+//        Log.e("SaveEntry", temp.getName());
+        Storage.getInstance().getBoards().get(boardIndex).add(temp);
+//        board.add(temp);
     }
 }
