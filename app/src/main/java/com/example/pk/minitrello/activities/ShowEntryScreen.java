@@ -52,6 +52,8 @@ public class ShowEntryScreen extends AppCompatActivity {
             }
         });
 
+//        ABC
+
         Button createNewEntryButton = (Button) findViewById(R.id.to_create_entry_button);
         createNewEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
