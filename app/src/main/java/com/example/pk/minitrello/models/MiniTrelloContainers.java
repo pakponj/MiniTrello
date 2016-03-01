@@ -1,12 +1,13 @@
 package com.example.pk.minitrello.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Pipatpol on 2559-02-29.
  */
-public class MiniTrelloContainers<T> {
+public class MiniTrelloContainers<T> implements Serializable {
     private List<T> children;
     private String name;
     private String desc;

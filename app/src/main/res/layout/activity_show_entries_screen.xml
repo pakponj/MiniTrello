@@ -17,7 +17,12 @@
         android:gravity="center"
         android:textSize="10pt"
         />
-    
+
+    <ListView
+        android:id="@+id/entry_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +34,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete All Board"
+        android:text="Delete All Entries"
         android:id="@+id/delete_all_button"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
