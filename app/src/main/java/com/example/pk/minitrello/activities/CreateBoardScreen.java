@@ -46,6 +46,7 @@ public class CreateBoardScreen extends AppCompatActivity {
 
     private void saveNewBoard() {
         Storage.getInstance().addBoard(new Board(boardName, boardDesc));
+        
     }
 
 }

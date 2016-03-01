@@ -10,12 +10,22 @@
     tools:context="com.example.pk.minitrello.activities.ShowEntryScreen">
 
     <TextView
+        android:id="@+id/entry_board_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Board name"
         android:gravity="center"
         android:textSize="10pt"
+        />
+
+    <TextView
+        android:id="@+id/entry_board_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="8pt"
+        android:gravity="center"
+        android:layout_below="@+id/entry_board_name"
         />
 
     <ListView

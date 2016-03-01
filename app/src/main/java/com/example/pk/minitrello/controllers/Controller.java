@@ -5,30 +5,30 @@ import java.util.List;
 
 public class Controller<T> {
 
-    private List<T> children;
+    private List<T> containers;
 
     public Controller() {
-        children = new ArrayList<T>();
+        containers = new ArrayList<T>();
     }
 
     public void addChild(T t) {
-        children.add(t);
+        containers.add(t);
     }
 
     public void removeChild(T t) {
-        children.remove(t);
+        containers.remove(t);
     }
 
     public void clearAll() {
-        children.clear();
+        containers.clear();
     }
 
-    public List<T> getChildren(){
-        return this.children;
+    public List<T> getContainers(){
+        return this.containers;
     }
 
-    public T getChild(T t){
-        return this.children.get(children.indexOf(t));
+    public T getContainer(T t){
+        return this.containers.get(containers.indexOf(t));
     }
 
 }

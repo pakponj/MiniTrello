@@ -3,10 +3,10 @@ package com.example.pk.minitrello.models;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.pk.minitrello.controllers.BoardController;
-import com.example.pk.minitrello.controllers.BoardHolderController;
-import com.example.pk.minitrello.controllers.CardController;
 import com.example.pk.minitrello.controllers.ListEntryController;
+import com.example.pk.minitrello.controllers.BoardController;
+import com.example.pk.minitrello.controllers.CommentController;
+import com.example.pk.minitrello.controllers.CardController;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,10 +25,10 @@ public class Storage {
 
     private static Storage storage;
 
-    private BoardHolderController boards;
-    private BoardController listEntries;
-    private CardController comments;
-    private ListEntryController cards;
+    private BoardController boards;
+    private ListEntryController listEntries;
+    private CommentController comments;
+    private CardController cards;
 
     private List<Board> boardList;
     private List<ListEntry> listEntryList;
@@ -36,10 +36,10 @@ public class Storage {
     private List<Comment> commentList;
 
     private Storage(){
-        this.boards = new BoardHolderController();
-        this.listEntries = new BoardController();
-        this.comments = new CardController();
-        this.cards = new ListEntryController();
+        this.boards = new BoardController();
+        this.listEntries = new ListEntryController();
+        this.cards = new CardController();
+        this.comments = new CommentController();
 
     }
 
@@ -81,19 +81,19 @@ public class Storage {
     }
 
     public List<Board> getBoards(){
-        return this.boards.getChildren();
+        return this.boards.getContainers();
     }
 
     public List<ListEntry> getListEntries(){
-        return this.listEntries.getChildren();
+        return this.listEntries.getContainers();
     }
 
     public List<Card> getCards(){
-        return this.cards.getChildren();
+        return this.cards.getContainers();
     }
 
     public List<Comment> getComments(){
-        return this.comments.getChildren();
+        return this.comments.getContainers();
     }
 
     public void clearBoards(){
@@ -113,19 +113,19 @@ public class Storage {
     }
 
     public Board getBoard(Board board){
-        return this.boards.getChild(board);
+        return this.boards.getContainer(board);
     }
 
     public ListEntry getListEntry(ListEntry listEntry){
-        return this.listEntries.getChild(listEntry);
+        return this.listEntries.getContainer(listEntry);
     }
 
     public Card getCard(Card card){
-        return this.cards.getChild(card);
+        return this.cards.getContainer(card);
     }
 
     public Comment getComment(Comment comment){
-        return this.comments.getChild(comment);
+        return this.comments.getContainer(comment);
     }
 
     public void saveData(Context context){
