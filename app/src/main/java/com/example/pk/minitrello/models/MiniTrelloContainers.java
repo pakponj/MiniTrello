@@ -44,4 +44,6 @@ public class MiniTrelloContainers<T> {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public List<T> getChildren() { return this.children; }
 }

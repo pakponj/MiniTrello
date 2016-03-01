@@ -12,6 +12,10 @@ import com.example.pk.minitrello.models.Card;
 
 import java.util.List;
 
+import java.util.List;
+
+import com.example.pk.minitrello.models.Card;
+
 public class CardAdapter extends ArrayAdapter<Card> {
     public CardAdapter(Context context, int resource, List<Card> objects) {
         super(context, resource, objects);

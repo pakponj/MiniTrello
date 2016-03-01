@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.models.Comment;
 
-
 import java.util.List;
 
 public class CommentAdapter extends ArrayAdapter<Comment> {
