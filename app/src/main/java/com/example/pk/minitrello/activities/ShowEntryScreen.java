@@ -76,7 +76,15 @@ public class    ShowEntryScreen extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(ShowEntryScreen.this, ShowCardScreen.class);
-                        intent.putExtra("entry", entryList.get(i));
+                        ListEntry listEntry = entryList.get(i);
+                        int listEntryIndex =
+                                Storage.getInstance()
+                                        .getBoards()
+                                        .get(boardIndex)
+                                        .getChildren()
+                                        .indexOf(listEntry);
+                        intent.putExtra("boardIndex",boardIndex);
+                        intent.putExtra("entryIndex", listEntryIndex);
                         startActivity(intent);
                     }
                 });

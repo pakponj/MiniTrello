@@ -18,13 +18,24 @@
         android:layout_alignParentTop="true"
         android:textSize="15pt"
         android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:id="@+id/card_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="8pt"
+        android:text="test"
+       android:layout_below="@+id/card_name"
         />
 
     <ListView
         android:id="@+id/board_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_name"
+        android:layout_below="@+id/card_desc"
         android:layout_above="@+id/add_comment_edittext"
         />
 
