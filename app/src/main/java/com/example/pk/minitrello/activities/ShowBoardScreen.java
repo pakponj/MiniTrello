@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.models.Board;
+import com.example.pk.minitrello.models.Storage;
 import com.example.pk.minitrello.views.BoardAdapter;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ShowBoardScreen extends AppCompatActivity {
     private void refreshBoards() {
         boardList.clear();
         //Add each board to the list from main storage
-        for(Board b: Storage.getInstance().getChildren()) {
+        for(Board b: Storage.getInstance().getBoards()) {
             boardList.add(b);
         }
         boardAdapter.notifyDataSetChanged();

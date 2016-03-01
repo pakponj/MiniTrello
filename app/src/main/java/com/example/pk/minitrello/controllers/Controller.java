@@ -23,4 +23,12 @@ public class Controller<T> {
         children.clear();
     }
 
+    public List<T> getChildren(){
+        return this.children;
+    }
+
+    public T getChild(T t){
+        return this.children.get(children.indexOf(t));
+    }
+
 }
