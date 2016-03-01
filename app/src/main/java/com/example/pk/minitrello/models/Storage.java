@@ -112,20 +112,20 @@ public class Storage {
         this.comments.clearAll();
     }
 
-    public Board getBoard(Board board){
-        return this.boards.getContainer(board);
+    public Board getBoard(int index){
+        return this.getBoards().get(index);
     }
 
-    public ListEntry getListEntry(ListEntry listEntry){
-        return this.listEntries.getContainer(listEntry);
+    public ListEntry getListEntry(int index){
+        return this.getListEntries().get(index);
     }
 
-    public Card getCard(Card card){
-        return this.cards.getContainer(card);
+    public Card getCard(int index){
+        return this.getCards().get(index);
     }
 
-    public Comment getComment(Comment comment){
-        return this.comments.getContainer(comment);
+    public Comment getComment(int index){
+        return this.getComments().get(index);
     }
 
     public void saveData(Context context){

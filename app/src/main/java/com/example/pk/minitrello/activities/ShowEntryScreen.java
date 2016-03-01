@@ -81,7 +81,6 @@ public class ShowEntryScreen extends AppCompatActivity {
 
     private void refreshEntries() {
         entryList.clear();
-//        Log.e("Board HashCode: ", board.hashCode()+"");
 //        Log.e("Empty Board", board.getChildren().isEmpty()+"");
         for(ListEntry e : Storage.getInstance().getBoards().get(boardIndex).getChildren()) {
 //            Log.e("ListEntry", e.getName());
