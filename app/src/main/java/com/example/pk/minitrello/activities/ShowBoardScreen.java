@@ -52,7 +52,6 @@ public class ShowBoardScreen extends AppCompatActivity {
         boardAdapter = new BoardAdapter(this,R.layout.board_cell, boardList);
         boardListView.setAdapter(boardAdapter);
 
-
     }
 
     private void refreshBoards() {

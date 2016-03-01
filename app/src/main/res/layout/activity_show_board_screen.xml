@@ -9,12 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.pk.minitrello.activities.ShowBoardScreen">
 
-
     <ListView
         android:id="@+id/board_list"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/to_create_board_button" />
+        android:layout_height="wrap_content"></ListView>
 
     <Button
         android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
         android:layout_height="wrap_content"
         android:text="Delete All Board"
         android:id="@+id/delete_all_button"
-        android:layout_below="@+id/board_list"
-        android:layout_alignRight="@+id/board_list"
+        android:layout_alignTop="@+id/to_create_board_button"
         android:layout_alignEnd="@+id/board_list" />
 </RelativeLayout>
