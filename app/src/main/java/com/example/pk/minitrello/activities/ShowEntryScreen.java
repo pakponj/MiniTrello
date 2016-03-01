@@ -19,7 +19,7 @@ import com.example.pk.minitrello.views.EntryAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowEntryScreen extends AppCompatActivity {
+public class    ShowEntryScreen extends AppCompatActivity {
 
     private List<ListEntry> entryList;
     private ListView entryListView;
@@ -43,12 +43,13 @@ public class ShowEntryScreen extends AppCompatActivity {
         board = Storage.getInstance().getBoards().get(boardIndex);
         entryBoardName.setText(board.getName());
         entryBoardDesc.setText(board.getDesc());
-        Button deleteButton = (Button) findViewById(R.id.delete_all_button);
+        Button deleteButton = (Button) findViewById(R.id.delete_current_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Storage.getInstance().clearListEntries();
-                refreshEntries();
+                Board board = Storage.getInstance().getBoards().get(boardIndex);
+                Storage.getInstance().removeBoard(board);
+                finish();
             }
         });
 
@@ -79,6 +80,15 @@ public class ShowEntryScreen extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+        Button deleteAllButton = (Button) findViewById(R.id.delete_all_button);
+        deleteAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Storage.getInstance().getBoards().get(boardIndex).clear();
+                refreshEntries();
+            }
+        });
     }
 
     private void refreshEntries() {

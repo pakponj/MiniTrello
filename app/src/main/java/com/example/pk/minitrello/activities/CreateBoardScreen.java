@@ -33,10 +33,6 @@ public class CreateBoardScreen extends AppCompatActivity {
                 boardName = name.getText().toString();
                 EditText desc = (EditText) findViewById(R.id.board_desc);
                 boardDesc = desc.getText().toString();
-                //TODO Code for putExtra
-
-                //Intent intent = new Intent(CreateBoardScreen.this , ShowBoardScreen.class);
-                //startActivity(intent);
                 saveNewBoard();
                 finish();
             }
