@@ -35,7 +35,8 @@ public class ShowBoardScreen extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO delete all shit
+                Storage.getInstance().clearBoards();
+                refreshBoards();
             }
         });
 

@@ -58,15 +58,17 @@ public class ShowEntryScreen extends AppCompatActivity {
         entryListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i,long l) {
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(ShowEntryScreen.this, ShowCardScreen.class);
-                        intent.putExtra("entry", )
+                        intent.putExtra("entry", entryList.get(i));
+                        startActivity(intent);
                     }
-        });
+                });
 
-        private void refreshEntries() {
+    }
+    private void refreshEntries() {
         entryList.clear();
-        for(ListEntry e: Storage.getInstance().getListEntries()) {
+        for (ListEntry e : Storage.getInstance().getListEntries()) {
             entryList.add(e);
         }
         entryAdapter.notifyDataSetChanged();
@@ -78,5 +80,4 @@ public class ShowEntryScreen extends AppCompatActivity {
         refreshEntries();
     }
 
-    }
 }
