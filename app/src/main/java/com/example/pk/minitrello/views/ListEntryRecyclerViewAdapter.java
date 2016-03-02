@@ -26,7 +26,8 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
     public ListEntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
-                inflate(R.layout.entry_cell, parent, false);
+                inflate(R.layout.card_view_cell, parent, false);
+//                inflate(R.layout.entry_cell, parent, false);
         return new ListEntryViewHolder(itemView);
     }
 
