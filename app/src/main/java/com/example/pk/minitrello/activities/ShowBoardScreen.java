@@ -3,7 +3,6 @@ package com.example.pk.minitrello.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,11 +56,12 @@ public class ShowBoardScreen extends AppCompatActivity {
         boardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ShowBoardScreen.this, ShowEntryScreen.class);
+//                Intent intent = new Intent(ShowBoardScreen.this, ShowEntryScreen.class);
+                Intent intent = new Intent(ShowBoardScreen.this, ShowRecycleEntryScreen.class);
                 Board board = boardList.get(i);
                 int boardIndex = Storage.getInstance().getBoards().indexOf(board);
                 intent.putExtra("boardIndex", boardIndex);
-                Log.e("Index #", boardIndex + "");
+//                Log.e("Index #", boardIndex + "");
                 startActivity(intent);
             }
         });
