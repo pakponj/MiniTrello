@@ -7,6 +7,7 @@ import com.example.pk.minitrello.controllers.ListEntryController;
 import com.example.pk.minitrello.controllers.BoardController;
 import com.example.pk.minitrello.controllers.CommentController;
 import com.example.pk.minitrello.controllers.CardController;
+import com.example.pk.minitrello.views.CardRecycleViewAdapter;
 import com.example.pk.minitrello.views.ListEntryRecyclerViewAdapter;
 
 import java.io.FileInputStream;
@@ -37,6 +38,7 @@ public class Storage {
     private List<Comment> commentList;
 
     private ListEntryRecyclerViewAdapter listEntryRecyclerViewAdapter;
+    private CardRecycleViewAdapter cardRecycleViewAdapter;
 
     private Storage(){
         this.boards = new BoardController();
@@ -196,6 +198,14 @@ public class Storage {
 
     public ListEntryRecyclerViewAdapter getListEntryRecyclerViewAdapter() {
         return this.listEntryRecyclerViewAdapter;
+    }
+
+    public void setCardRecycleViewAdapter(CardRecycleViewAdapter adapter) {
+        this.cardRecycleViewAdapter = adapter;
+    }
+
+    public CardRecycleViewAdapter getCardRecycleViewAdapter() {
+        return this.cardRecycleViewAdapter;
     }
 
 }

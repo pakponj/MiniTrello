@@ -34,6 +34,8 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
     }
 
     private void initComponents() {
+        boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
+        board = Storage.getInstance().getBoards().get(boardIndex);
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
 
@@ -42,7 +44,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
-        final List<ListEntry> entries = Storage.getInstance().getListEntries();
+        final List<ListEntry> entries = board.getChildren();
         adapter = new ListEntryRecyclerViewAdapter(entries);
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
@@ -59,8 +61,6 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
 
         TextView entryBoardName = (TextView) findViewById(R.id.show_recycle_board_name);
         TextView entryBoardDesc = (TextView) findViewById(R.id.show_recycle_board_desc);
-        boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
-        board = Storage.getInstance().getBoards().get(boardIndex);
         entryBoardName.setText(board.getName());
         entryBoardDesc.setText(board.getDesc());
         Button delButton = (Button) findViewById(R.id.delete_current_button);

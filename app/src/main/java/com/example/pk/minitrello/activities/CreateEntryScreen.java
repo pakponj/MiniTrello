@@ -46,7 +46,7 @@ public class CreateEntryScreen extends AppCompatActivity {
                 Board b = Storage.getInstance().getBoard(boardIndex);
                 ListEntry tmp = new ListEntry(entryName, entryDesc);
                 adapter.add(tmp,b.getChildren().size());
-                Storage.getInstance().getBoards().get(boardIndex).add(tmp);
+           //     Storage.getInstance().getBoards().get(boardIndex).add(tmp);
                 finish();
             }
         });

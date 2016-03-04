@@ -33,8 +33,17 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true">
         </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/to_create_entry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
@@ -52,15 +61,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         />
-
-    <Button
-        android:id="@+id/to_create_entry_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/delete_current_button"
-        android:layout_alignParentStart="true"
-        android:text="Create New Entry"
-        android:layout_alignEnd="@+id/relativeLayout" />
 
     <Button
         android:layout_width="wrap_content"

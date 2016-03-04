@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     card_view:cardCornerRadius="10dp"
-    card_view:cardBackgroundColor="#a5f1ff"
+    card_view:cardBackgroundColor="#cccccc"
     android:minWidth="200dp"
     android:layout_margin="5dp"
     android:layout_width="match_parent"
@@ -11,13 +11,15 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <TextView
             android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|top"
             android:textSize="7pt"/>
+
         <TextView
             android:id="@+id/body"
             android:layout_width="match_parent"
@@ -29,8 +31,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/card_recycle_views"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center">
         </android.support.v7.widget.RecyclerView>
 
+        <Button
+            android:id="@+id/add_card_button"
+            android:text="Add new card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/body"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
