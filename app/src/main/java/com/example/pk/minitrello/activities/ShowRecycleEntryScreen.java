@@ -1,5 +1,6 @@
 package com.example.pk.minitrello.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -7,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -48,7 +52,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         final List<ListEntry> entries = board.getChildren();
-        adapter = new ListEntryRecyclerViewAdapter(entries, this);
+        adapter = new ListEntryRecyclerViewAdapter(entries, this , boardIndex  );
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
 
@@ -88,10 +92,10 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         delAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Storage.getInstance().getBoard(boardIndex).clear();
+                refreshDeleteAll();
+
             }
         });
-
         /*Button addCardButton = (Button) findViewById(R.id.add_card_button);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +104,14 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
                 intent.putExtra("createCard", entryIndex);
             }
         });*/
+
+    }
+
+    private void refreshDeleteAll() {
+        Board board = Storage.getInstance().getBoard(boardIndex);
+        board.clear();
+        //Add each board to the list from main storage
+        adapter.notifyDataSetChanged();
     }
 
     public interface OnRecycleItemClickListener<ListEntry> {

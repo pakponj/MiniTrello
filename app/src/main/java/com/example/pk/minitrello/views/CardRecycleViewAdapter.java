@@ -52,6 +52,7 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
     public void add(Card card, int position) {
         cards.add(position, card);
         notifyItemInserted(position);
+
     }
 
     public void remove(Card card) {

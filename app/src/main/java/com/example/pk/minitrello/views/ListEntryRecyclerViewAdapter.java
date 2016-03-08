@@ -1,6 +1,7 @@
 package com.example.pk.minitrello.views;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.activities.CreateCardScreen;
+import com.example.pk.minitrello.activities.ShowRecycleEntryScreen;
+import com.example.pk.minitrello.models.Board;
 import com.example.pk.minitrello.models.ListEntry;
+import com.example.pk.minitrello.models.Storage;
 
 import java.util.List;
 
@@ -20,13 +24,15 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
 
     private List<ListEntry> entries;
     private Activity activity;
+    private int boardIndex;
 
-    public ListEntryRecyclerViewAdapter(List<ListEntry> entries, Activity activity) {
+    public ListEntryRecyclerViewAdapter(List<ListEntry> entries, Activity activity , int boardIndex) {
         if( entries == null) {
             throw new IllegalArgumentException("Entries must not be null");
         }
         this.entries = entries;
         this.activity = activity;
+        this.boardIndex = boardIndex;
     }
 
     @Override
@@ -35,7 +41,7 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                 from(parent.getContext()).
                 inflate(R.layout.entry_view_cell, parent, false);
 //                inflate(R.layout.entry_cell, parent, false);
-        return new ListEntryViewHolder(itemView, activity);
+        return new ListEntryViewHolder(itemView, activity , boardIndex);
     }
 
     @Override
@@ -57,7 +63,7 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
         Button button;
         int entryIndex = -1;
 
-        public ListEntryViewHolder(View itemView, final Activity activity) {
+        public ListEntryViewHolder(View itemView, final Activity activity , final int boardIndex ) {
             super(itemView);
             subject = (TextView) itemView.findViewById(R.id.subject);
             body = (TextView) itemView.findViewById(R.id.body);
@@ -72,6 +78,19 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                 }
             });*/
             itemView.setOnClickListener(this);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    entryIndex = getLayoutPosition();
+                    Log.e("Long ", "Clicked");
+                    Board temp = Storage.getInstance().getBoard(boardIndex);
+                    temp.getChildren().remove(entryIndex);
+                    notifyDataSetChanged();
+                    return false;
+                }
+            });
+
         }
 
         @Override
@@ -83,7 +102,8 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, CreateCardScreen.class);
-                    intent.putExtra("createCard", entryIndex);
+                    intent.putExtra("boardIndex",boardIndex);
+                    intent.putExtra("entryIndex", entryIndex);
                     activity.startActivity(intent);
                 }
             });
@@ -100,5 +120,6 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
         entries.remove(position);
         notifyItemRemoved(position);
     }
+
 
 }

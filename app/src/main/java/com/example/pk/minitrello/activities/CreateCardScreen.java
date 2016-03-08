@@ -7,16 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.Board;
 import com.example.pk.minitrello.models.Card;
 import com.example.pk.minitrello.models.ListEntry;
 import com.example.pk.minitrello.models.Storage;
+import com.example.pk.minitrello.views.CardAdapter;
 import com.example.pk.minitrello.views.CardRecycleViewAdapter;
 
 public class CreateCardScreen extends AppCompatActivity {
 
     private String cardName;
     private EditText name;
-    private int entryIndex;
+    private int entryIndex , boardIndex;
     private CardRecycleViewAdapter adapter;
 
     @Override
@@ -33,11 +35,17 @@ public class CreateCardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 name = (EditText) findViewById(R.id.card_edittext_name);
                 cardName = name.getText().toString();
-                entryIndex = (Integer) getIntent().getSerializableExtra("createCard");
-                adapter = Storage.getInstance().getCardRecycleViewAdapter();
-                ListEntry le = Storage.getInstance().getListEntry(entryIndex);
+                entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
+                boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
+                Board temp = Storage.getInstance().getBoard(boardIndex);
+                ListEntry le = temp.getChildren().get(entryIndex);
+
+                CardRecycleViewAdapter adapter = new CardRecycleViewAdapter(le.getChildren());
+                Storage.getInstance().setCardRecycleViewAdapter(adapter);
+
                 Card tmp = new Card(cardName,null);
                 adapter.add(tmp,le.getChildren().size());
+
                 finish();
             }
         });
