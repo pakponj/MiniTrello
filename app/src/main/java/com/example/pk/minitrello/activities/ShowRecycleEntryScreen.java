@@ -15,6 +15,7 @@ import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.models.Board;
 import com.example.pk.minitrello.models.ListEntry;
 import com.example.pk.minitrello.models.Storage;
+import com.example.pk.minitrello.views.CardRecycleViewAdapter;
 import com.example.pk.minitrello.views.ListEntryRecyclerViewAdapter;
 
 import java.util.List;
@@ -22,7 +23,9 @@ import java.util.List;
 public class ShowRecycleEntryScreen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private RecyclerView cardRecyclerView;
     private ListEntryRecyclerViewAdapter adapter;
+    private CardRecycleViewAdapter cardRecycleViewAdapter;
     private int boardIndex;
     private Board board;
 
@@ -45,7 +48,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         final List<ListEntry> entries = board.getChildren();
-        adapter = new ListEntryRecyclerViewAdapter(entries);
+        adapter = new ListEntryRecyclerViewAdapter(entries, this);
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
 
@@ -89,6 +92,14 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
             }
         });
 
+        /*Button addCardButton = (Button) findViewById(R.id.add_card_button);
+        addCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowRecycleEntryScreen.this, CreateCardScreen.class);
+                intent.putExtra("createCard", entryIndex);
+            }
+        });*/
     }
 
     public interface OnRecycleItemClickListener<ListEntry> {

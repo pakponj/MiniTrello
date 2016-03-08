@@ -20,7 +20,8 @@
         <activity android:name=".activities.CreateEntryScreen" />
         <activity android:name=".activities.ShowEntryScreen" />
         <activity android:name=".activities.ShowCardScreen" />
-        <activity android:name=".activities.ShowRecycleEntryScreen"></activity>
+        <activity android:name=".activities.ShowRecycleEntryScreen" />
+        <activity android:name=".activities.CreateCardScreen"></activity>
     </application>
 
 </manifest>

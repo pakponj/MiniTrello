@@ -42,7 +42,7 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
     public final static class CardViewHolder extends RecyclerView.ViewHolder {
 
         TextView subject;
-
+        
         public CardViewHolder(View itemView) {
             super(itemView);
             subject = (TextView) itemView.findViewById(R.id.subject);
