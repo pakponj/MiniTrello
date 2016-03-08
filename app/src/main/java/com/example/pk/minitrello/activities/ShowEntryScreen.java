@@ -25,7 +25,7 @@ public class    ShowEntryScreen extends AppCompatActivity {
     private ListView entryListView;
     private EntryAdapter entryAdapter;
     private Board board;
-    int boardIndex;
+    int boardIndex,cardIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

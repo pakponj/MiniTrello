@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Create New Board"
-
         />
 
 

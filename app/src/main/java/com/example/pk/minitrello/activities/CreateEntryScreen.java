@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.pk.minitrello.R;
+import com.example.pk.minitrello.models.Board;
 import com.example.pk.minitrello.models.ListEntry;
 import com.example.pk.minitrello.models.Storage;
+import com.example.pk.minitrello.views.ListEntryRecyclerViewAdapter;
 
 public class CreateEntryScreen extends AppCompatActivity {
 
@@ -39,7 +41,12 @@ public class CreateEntryScreen extends AppCompatActivity {
                 //TODO fill entry
 //                Intent intent = new Intent(CreateEntryScreen.this, ShowEntryScreen.class);
 //                startActivity(intent);
-                saveNewEntry();
+                //saveNewEntry();
+                ListEntryRecyclerViewAdapter adapter = Storage.getInstance().getListEntryRecyclerViewAdapter();
+                Board b = Storage.getInstance().getBoard(boardIndex);
+                ListEntry tmp = new ListEntry(entryName, entryDesc);
+                adapter.add(tmp,b.getChildren().size());
+           //     Storage.getInstance().getBoards().get(boardIndex).add(tmp);
                 finish();
             }
         });

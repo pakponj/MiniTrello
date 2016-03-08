@@ -15,11 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.pk.minitrello.activities.ShowBoardScreen" />
-        <activity android:name="com.example.pk.minitrello.activities.CreateBoardScreen" />
-        <activity android:name="com.example.pk.minitrello.activities.CreateEntryScreen" />
-        <activity android:name="com.example.pk.minitrello.activities.ShowEntryScreen" />
-        <activity android:name="com.example.pk.minitrello.activities.ShowCardScreen"></activity>
+        <activity android:name=".activities.ShowBoardScreen" />
+        <activity android:name=".activities.CreateBoardScreen" />
+        <activity android:name=".activities.CreateEntryScreen" />
+        <activity android:name=".activities.ShowEntryScreen" />
+        <activity android:name=".activities.ShowCardScreen" />
+        <activity android:name=".activities.ShowRecycleEntryScreen" />
+        <activity android:name=".activities.CreateCardScreen"></activity>
     </application>
 
 </manifest>
