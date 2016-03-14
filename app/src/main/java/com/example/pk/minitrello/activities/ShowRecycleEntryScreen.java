@@ -49,26 +49,6 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         List<ListEntry> entries = board.getChildren();
-//        for( ListEntry le: entries) {
-//            Log.e("Initialization","Card Recycler View Initialization");
-//            RecyclerView cardRecylerView = (RecyclerView) findViewById(R.id.card_recycle_view);
-//            cardRecylerView.setHasFixedSize(true);
-//
-//            LinearLayoutManager llm = new LinearLayoutManager(this);
-//            llm.setOrientation(LinearLayoutManager.VERTICAL);
-//            llm.scrollToPosition(0);
-//            cardRecyclerView.setLayoutManager(llm);
-//            RecyclerView.ItemDecoration id = new RecyclerView.ItemDecoration() {
-//                @Override
-//                public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-//                    super.onDraw(c, parent, state);
-//                }
-//            };
-//            cardRecylerView.addItemDecoration(id);
-//            cardRecylerView.setItemAnimator(new DefaultItemAnimator());
-//            cardRecylerView.setAdapter(le.getAdapter());
-//            Log.e("Is the adapter empty?", le.getAdapter().isEmpty() + "");
-//        }
         adapter = new ListEntryRecyclerViewAdapter(entries, this , boardIndex  );
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
@@ -83,17 +63,6 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
 
-        //Card's recycler view
-        /*cardRecyclerView = (RecyclerView) findViewById(R.id.card_recycle_view);
-        cardRecyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager cardLayoutManager = new LinearLayoutManager(this);
-        cardLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        cardLayoutManager.scrollToPosition(0);
-        cardRecyclerView.setLayoutManager(cardLayoutManager);
-*/
-//        final List<Card> cards = entry
-
         TextView entryBoardName = (TextView) findViewById(R.id.show_recycle_board_name);
         TextView entryBoardDesc = (TextView) findViewById(R.id.show_recycle_board_desc);
         entryBoardName.setText(board.getName());
@@ -107,15 +76,6 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
             }
         });
 
-//        ImageView circleImageView = (ImageView) findViewById(R.id.to_create_entry_button);
-//        circleImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ShowRecycleEntryScreen.this, CreateEntryScreen.class);
-//                intent.putExtra("add_in_this_board", boardIndex);
-//                startActivity(intent);
-//            }
-//        });
         Button createNewEntryButton = (Button) findViewById(R.id.to_create_entry_button);
         createNewEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override

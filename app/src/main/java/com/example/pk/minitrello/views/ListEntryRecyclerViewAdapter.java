@@ -71,23 +71,6 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
             body = (TextView) itemView.findViewById(R.id.body);
             listView = (ListView) itemView.findViewById(R.id.card_list_view);
             button = (Button) itemView.findViewById(R.id.add_card_button);
-//            rv = (RecyclerView) itemView.findViewById(R.id.card_recycle_view);
-//            rv.setHasFixedSize(true);
-//            LinearLayoutManager llm = new LinearLayoutManager(activity);
-//            llm.setOrientation(LinearLayoutManager.VERTICAL);
-//            llm.scrollToPosition(0);
-//
-//            rv.setLayoutManager(llm);
-////            rv.setLayoutManager(cllm);
-//            rv.addItemDecoration(new RecyclerView.ItemDecoration() {
-//                @Override
-//                public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-//                    super.onDraw(c, parent, state);
-//                }
-//            });
-//            CardRecycleViewAdapter cardRecycleViewAdapter = new CardRecycleViewAdapter(null);
-//            rv.setAdapter(cardRecycleViewAdapter);
-
 
             button.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -95,12 +78,7 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                     entryIndex = getLayoutPosition();
                     Board temp = Storage.getInstance().getBoard(boardIndex);
                     ListEntry le = temp.getChildren().get(entryIndex);
-//                    CardAdapter cardAdapter = entries.get(entryIndex).getCardAdapter();
                     if(le.getCardAdapter() == null) le.setCardAdapter(new CardAdapter(activity, R.layout.card_cell,le.getChildren()));
-//                    if(rv.getAdapter() == null) {
-//                        rv.setAdapter(new CardRecycleViewAdapter(entries.get(entryIndex).getChildren()));
-//                        le.setAdapter((CardRecycleViewAdapter) rv.getAdapter());
-//                    }
                     listView.setAdapter(le.getCardAdapter());
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -116,11 +94,9 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                     Intent intent = new Intent(activity, CreateCardScreen.class);
                     intent.putExtra("boardIndex",boardIndex);
                     intent.putExtra("entryIndex",entryIndex);
-//                    intent.putExtra("createCard", entryIndex);
                     activity.startActivity(intent);
                 }
             });
-            //itemView.setOnClickListener(this);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -136,46 +112,6 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
 
         }
 
-       /* @Override
-        public void onClick(View v) {
-            entryIndex = getLayoutPosition();
-            Log.e("Entry's Index: ", "Entry's index: " + entryIndex);
-            ListEntry entry = Storage.getInstance().
-                                getBoard(boardIndex).
-                                getChildren().
-                                get(entryIndex);
-            recyclerView = entry.getRecyclerView();
-            if(recyclerView == null) {
-                recyclerView = (RecyclerView) v.findViewById(R.id.card_recycle_view);
-                recyclerView.setHasFixedSize(true);
-
-                LinearLayoutManager llm = new LinearLayoutManager(activity);
-                llm.setOrientation(LinearLayoutManager.VERTICAL);
-                llm.scrollToPosition(0);
-                recyclerView.setLayoutManager(llm);
-                recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-                    @Override
-                    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                        super.onDraw(c, parent, state);
-                    }
-                });
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-            }
-            CardRecycleViewAdapter adapter = entry.getAdapter();
-            if( adapter == null ) entry.setAdapter(new CardRecycleViewAdapter(entry.getChildren()));
-            recyclerView.setAdapter(adapter);
-            entry.setRecyclerView(recyclerView);
-            button.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(activity, CreateCardScreen.class);
-                    intent.putExtra("boardIndex",boardIndex);
-                    intent.putExtra("entryIndex",entryIndex);
-                    activity.startActivity(intent);
-                }
-            });
-        }*/
     }
 
     public void add(ListEntry entry, int position) {

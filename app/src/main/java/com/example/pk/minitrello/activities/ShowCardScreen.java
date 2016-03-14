@@ -55,7 +55,6 @@ public class ShowCardScreen extends AppCompatActivity {
         boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
         entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
         cardIndex = (Integer) getIntent().getSerializableExtra("cardIndex");
-        //board = Storage.getInstance().getBoards().get(boardIndex);
         board = Storage.getInstance().getBoard(boardIndex);
         listEntry = board.getChildren().get(entryIndex);
         card = listEntry.getChildren().get(cardIndex);

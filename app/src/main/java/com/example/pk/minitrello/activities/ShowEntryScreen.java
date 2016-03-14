@@ -60,7 +60,6 @@ public class    ShowEntryScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ShowEntryScreen.this, CreateEntryScreen.class);
-//                boardIndex = Storage.getInstance().getBoards().indexOf(board);
 //                Log.e("Index #", boardIndex+"");
                 intent.putExtra("add_in_this_board",boardIndex);
                 startActivity(intent);

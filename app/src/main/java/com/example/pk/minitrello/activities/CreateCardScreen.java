@@ -19,7 +19,6 @@ public class CreateCardScreen extends AppCompatActivity {
     private EditText name;
     private String cardName;
     private int entryIndex , boardIndex;
-//    private CardRecycleViewAdapter adapter;
     private CardAdapter cardAdapter;
     private Board board;
     private ListEntry entry;
@@ -43,10 +42,7 @@ public class CreateCardScreen extends AppCompatActivity {
                 board = Storage.getInstance().getBoard(boardIndex);
                 entry = board.getChildren().get(entryIndex);
                 Log.e("Add card to the entry", "Entry name: " + entry.getName());
-//                Log.e("Entry's recycler view", "Entry has recylcer view: " + (le.getRecyclerView()==null));
                 cardAdapter = entry.getCardAdapter();
-//                Card tmp = new Card(cardName, null);
-//                .add(tmp, le.getChildren().size());
                 saveNewCard();
                 cardAdapter.notifyDataSetChanged();
                 finish();

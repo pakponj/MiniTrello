@@ -32,7 +32,6 @@ public class CardAdapter extends ArrayAdapter<Card> {
 
         Card card = getItem(position);
         subject.setText(card.getName());
-//        body.setText(card.getDesc());
 
         return v;
     }
