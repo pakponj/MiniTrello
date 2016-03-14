@@ -2,6 +2,7 @@ package com.example.pk.minitrello.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,14 +13,16 @@ import com.example.pk.minitrello.models.Card;
 import com.example.pk.minitrello.models.ListEntry;
 import com.example.pk.minitrello.models.Storage;
 import com.example.pk.minitrello.views.CardAdapter;
-import com.example.pk.minitrello.views.CardRecycleViewAdapter;
 
 public class CreateCardScreen extends AppCompatActivity {
 
-    private String cardName;
     private EditText name;
+    private String cardName;
     private int entryIndex , boardIndex;
-    private CardRecycleViewAdapter adapter;
+//    private CardRecycleViewAdapter adapter;
+    private CardAdapter cardAdapter;
+    private Board board;
+    private ListEntry entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +40,22 @@ public class CreateCardScreen extends AppCompatActivity {
                 cardName = name.getText().toString();
                 entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
                 boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
-                Board temp = Storage.getInstance().getBoard(boardIndex);
-                ListEntry le = temp.getChildren().get(entryIndex);
-
-                CardRecycleViewAdapter adapter = new CardRecycleViewAdapter(le.getChildren());
-                Storage.getInstance().setCardRecycleViewAdapter(adapter);
-
-                Card tmp = new Card(cardName,null);
-                adapter.add(tmp,le.getChildren().size());
-
+                board = Storage.getInstance().getBoard(boardIndex);
+                entry = board.getChildren().get(entryIndex);
+                Log.e("Add card to the entry", "Entry name: " + entry.getName());
+//                Log.e("Entry's recycler view", "Entry has recylcer view: " + (le.getRecyclerView()==null));
+                cardAdapter = entry.getCardAdapter();
+//                Card tmp = new Card(cardName, null);
+//                .add(tmp, le.getChildren().size());
+                saveNewCard();
+                cardAdapter.notifyDataSetChanged();
                 finish();
             }
         });
+    }
+
+    private void saveNewCard() {
+        entry.add(new Card(cardName, null));
     }
 
 }

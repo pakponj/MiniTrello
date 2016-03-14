@@ -1,6 +1,7 @@
 package com.example.pk.minitrello.views;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
-                inflate(R.layout.card_cell, parent, false);
+                inflate(R.layout.card_view_cell, parent, false);
         return new CardViewHolder(itemView);
     }
 
@@ -39,7 +40,7 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
     @Override
     public int getItemCount() { return cards.size(); }
 
-    public final static class CardViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewHolder extends RecyclerView.ViewHolder {
 
         TextView subject;
         
@@ -51,8 +52,8 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
 
     public void add(Card card, int position) {
         cards.add(position, card);
+        Log.e("Card add to adapter", "Card: "+card.getName()+" has been added to adapter.");
         notifyItemInserted(position);
-
     }
 
     public void remove(Card card) {
@@ -60,5 +61,10 @@ public class CardRecycleViewAdapter extends  RecyclerView.Adapter<CardRecycleVie
         cards.remove(position);
         notifyItemRemoved(position);
     }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
 
 }

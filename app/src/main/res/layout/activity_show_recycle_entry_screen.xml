@@ -26,7 +26,6 @@
         android:layout_below="@+id/show_recycle_board_name"/>
 
     <Button
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Current Board"
@@ -36,7 +35,6 @@
         />
 
     <Button
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete All Entries"
@@ -44,6 +42,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         />
+
     <RelativeLayout
         android:layout_above="@+id/delete_current_button"
         android:layout_width="match_parent"
@@ -64,6 +63,12 @@
             android:text="+"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
+
+        <!--<android.support.v4.widget.ImageView-->
+            <!--android:id="@+id/to_create_entry_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@android:drawable/ic_input_add"/>-->
 
     </RelativeLayout>
 

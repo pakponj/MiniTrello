@@ -12,10 +12,6 @@ import com.example.pk.minitrello.models.Card;
 
 import java.util.List;
 
-import java.util.List;
-
-import com.example.pk.minitrello.models.Card;
-
 public class CardAdapter extends ArrayAdapter<Card> {
     public CardAdapter(Context context, int resource, List<Card> objects) {
         super(context, resource, objects);
@@ -36,7 +32,7 @@ public class CardAdapter extends ArrayAdapter<Card> {
 
         Card card = getItem(position);
         subject.setText(card.getName());
-        body.setText(card.getDesc());
+//        body.setText(card.getDesc());
 
         return v;
     }

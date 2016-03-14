@@ -45,8 +45,32 @@ public class CreateEntryScreen extends AppCompatActivity {
                 ListEntryRecyclerViewAdapter adapter = Storage.getInstance().getListEntryRecyclerViewAdapter();
                 Board b = Storage.getInstance().getBoard(boardIndex);
                 ListEntry tmp = new ListEntry(entryName, entryDesc);
+//                tmp.setAdapter(new CardRecycleViewAdapter(new ArrayList<Card>()));
+//                RecyclerView rv = (RecyclerView) findViewById(R.id.)
+                /*tmp.setAdapter(new CardRecycleViewAdapter(tmp.getChildren()));
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.card_recycle_view);
+                recyclerView.setHasFixedSize(true);
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                layoutManager.scrollToPosition(0);
+                recyclerView.setLayoutManager(layoutManager);
+
+                recyclerView.setAdapter(tmp.getAdapter());
+
+                recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                    @Override
+                    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                        super.onDraw(c, parent, state);
+                    }
+                });
+                recyclerView.setItemAnimator((new DefaultItemAnimator()));
+                recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
+
+                tmp.setRecyclerView(recyclerView);*/
                 adapter.add(tmp,b.getChildren().size());
-           //     Storage.getInstance().getBoards().get(boardIndex).add(tmp);
+                adapter.notifyDataSetChanged();
+                //Storage.getInstance().getBoards().get(boardIndex).add(tmp);
                 finish();
             }
         });

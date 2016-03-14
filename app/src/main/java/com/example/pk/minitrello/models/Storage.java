@@ -3,11 +3,12 @@ package com.example.pk.minitrello.models;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.pk.minitrello.controllers.ListEntryController;
 import com.example.pk.minitrello.controllers.BoardController;
-import com.example.pk.minitrello.controllers.CommentController;
 import com.example.pk.minitrello.controllers.CardController;
-import com.example.pk.minitrello.views.CardRecycleViewAdapter;
+import com.example.pk.minitrello.controllers.CommentController;
+import com.example.pk.minitrello.controllers.ListEntryController;
+import com.example.pk.minitrello.views.CardAdapter;
+import com.example.pk.minitrello.views.CommentAdapter;
 import com.example.pk.minitrello.views.ListEntryRecyclerViewAdapter;
 
 import java.io.FileInputStream;
@@ -38,7 +39,10 @@ public class Storage {
     private List<Comment> commentList;
 
     private ListEntryRecyclerViewAdapter listEntryRecyclerViewAdapter;
-    private CardRecycleViewAdapter cardRecycleViewAdapter;
+//    private CardRecycleViewAdapter cardRecycleViewAdapter;
+
+    private List<CardAdapter> cardAdapters;
+    private List<CommentAdapter> commentAdapters;
 
     private Storage(){
         this.boards = new BoardController();
@@ -200,12 +204,28 @@ public class Storage {
         return this.listEntryRecyclerViewAdapter;
     }
 
-    public void setCardRecycleViewAdapter(CardRecycleViewAdapter adapter) {
-        this.cardRecycleViewAdapter = adapter;
+    public void addCardAdapter(CardAdapter cardAdapter) {
+        cardAdapters.add(cardAdapter);
     }
 
-    public CardRecycleViewAdapter getCardRecycleViewAdapter() {
-        return this.cardRecycleViewAdapter;
+    public CardAdapter getCardAdapter(int index) {
+        return cardAdapters.get(index);
     }
+
+    public void addCommentAdapter(CommentAdapter commentAdapter) {
+        commentAdapters.add(commentAdapter);
+    }
+
+    public CommentAdapter getCommentAdapter(int index) {
+        return commentAdapters.get(index);
+    }
+
+//    public void setCardRecycleViewAdapter(CardRecycleViewAdapter adapter) {
+//        this.cardRecycleViewAdapter = adapter;
+//    }
+//
+//    public CardRecycleViewAdapter getCardRecycleViewAdapter() {
+//        return this.cardRecycleViewAdapter;
+//    }
 
 }

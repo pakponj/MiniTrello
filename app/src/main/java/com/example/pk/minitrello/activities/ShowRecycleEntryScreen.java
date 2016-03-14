@@ -1,6 +1,5 @@
 package com.example.pk.minitrello.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -8,10 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,6 +39,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
     private void initComponents() {
         boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
         board = Storage.getInstance().getBoards().get(boardIndex);
+        //Entry's recycler view
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
 
@@ -51,7 +48,27 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
-        final List<ListEntry> entries = board.getChildren();
+        List<ListEntry> entries = board.getChildren();
+//        for( ListEntry le: entries) {
+//            Log.e("Initialization","Card Recycler View Initialization");
+//            RecyclerView cardRecylerView = (RecyclerView) findViewById(R.id.card_recycle_view);
+//            cardRecylerView.setHasFixedSize(true);
+//
+//            LinearLayoutManager llm = new LinearLayoutManager(this);
+//            llm.setOrientation(LinearLayoutManager.VERTICAL);
+//            llm.scrollToPosition(0);
+//            cardRecyclerView.setLayoutManager(llm);
+//            RecyclerView.ItemDecoration id = new RecyclerView.ItemDecoration() {
+//                @Override
+//                public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+//                    super.onDraw(c, parent, state);
+//                }
+//            };
+//            cardRecylerView.addItemDecoration(id);
+//            cardRecylerView.setItemAnimator(new DefaultItemAnimator());
+//            cardRecylerView.setAdapter(le.getAdapter());
+//            Log.e("Is the adapter empty?", le.getAdapter().isEmpty() + "");
+//        }
         adapter = new ListEntryRecyclerViewAdapter(entries, this , boardIndex  );
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
@@ -66,6 +83,17 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
 
+        //Card's recycler view
+        /*cardRecyclerView = (RecyclerView) findViewById(R.id.card_recycle_view);
+        cardRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager cardLayoutManager = new LinearLayoutManager(this);
+        cardLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        cardLayoutManager.scrollToPosition(0);
+        cardRecyclerView.setLayoutManager(cardLayoutManager);
+*/
+//        final List<Card> cards = entry
+
         TextView entryBoardName = (TextView) findViewById(R.id.show_recycle_board_name);
         TextView entryBoardDesc = (TextView) findViewById(R.id.show_recycle_board_desc);
         entryBoardName.setText(board.getName());
@@ -79,6 +107,15 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
             }
         });
 
+//        ImageView circleImageView = (ImageView) findViewById(R.id.to_create_entry_button);
+//        circleImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ShowRecycleEntryScreen.this, CreateEntryScreen.class);
+//                intent.putExtra("add_in_this_board", boardIndex);
+//                startActivity(intent);
+//            }
+//        });
         Button createNewEntryButton = (Button) findViewById(R.id.to_create_entry_button);
         createNewEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,18 +130,8 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 refreshDeleteAll();
-
             }
         });
-        /*Button addCardButton = (Button) findViewById(R.id.add_card_button);
-        addCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShowRecycleEntryScreen.this, CreateCardScreen.class);
-                intent.putExtra("createCard", entryIndex);
-            }
-        });*/
-
     }
 
     private void refreshDeleteAll() {
@@ -112,10 +139,6 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         board.clear();
         //Add each board to the list from main storage
         adapter.notifyDataSetChanged();
-    }
-
-    public interface OnRecycleItemClickListener<ListEntry> {
-        public void onItemClick(View view, ListEntry entry);
     }
 
 }
