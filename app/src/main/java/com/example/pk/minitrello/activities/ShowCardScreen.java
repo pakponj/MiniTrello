@@ -17,6 +17,7 @@ import com.example.pk.minitrello.models.Storage;
 import com.example.pk.minitrello.views.CardAdapter;
 import com.example.pk.minitrello.views.CommentAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCardScreen extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class ShowCardScreen extends AppCompatActivity {
 
     int boardIndex,entryIndex,cardIndex;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +48,17 @@ public class ShowCardScreen extends AppCompatActivity {
     }
 
     public void initComponents(){
+        commentList = new ArrayList<Comment>();
+        commentAdapter = new CommentAdapter(ShowCardScreen.this, R.layout.comment_cell, commentList);
         TextView commentBoardName = (TextView) findViewById(R.id.card_name);
         TextView commentBoardDesc = (TextView) findViewById(R.id.card_desc);
         boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
         entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
         cardIndex = (Integer) getIntent().getSerializableExtra("cardIndex");
-        board = Storage.getInstance().getBoards().get(boardIndex);
+        //board = Storage.getInstance().getBoards().get(boardIndex);
+        board = Storage.getInstance().getBoard(boardIndex);
         listEntry = board.getChildren().get(entryIndex);
-        card = Storage.getInstance().getCard(cardIndex);
+        card = listEntry.getChildren().get(cardIndex);
         commentBoardName.setText(listEntry.getName());
         commentBoardDesc.setText(listEntry.getDesc());
         addCommentButton = (Button) findViewById(R.id.add_comment_button);
@@ -75,7 +80,7 @@ public class ShowCardScreen extends AppCompatActivity {
 
     public void refreshCard(){
         commentList.clear();
-        card = Storage.getInstance().getCard(cardIndex);
+        card = listEntry.getChildren().get(cardIndex);
         for(Comment c: card.getChildren()) {
             commentList.add(c);
         }
