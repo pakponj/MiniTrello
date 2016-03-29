@@ -48,7 +48,7 @@ public class Comment {
     }
 
     public String getReadableCreatedTime(){
-        SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date date = new Date(this.createdTime);
         return sdf.format(date);
     }

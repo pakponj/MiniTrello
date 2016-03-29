@@ -29,10 +29,12 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 
         TextView subject = (TextView) v.findViewById(R.id.subject);
         TextView body = (TextView) v.findViewById(R.id.body);
+        TextView time = (TextView) v.findViewById(R.id.time);
 
         Comment comment = getItem(position);
         subject.setText(comment.getSubject());
         body.setText(comment.getBody());
+        time.setText(comment.getReadableCreatedTime());
 
         return v;
     }

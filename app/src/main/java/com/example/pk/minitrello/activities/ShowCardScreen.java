@@ -89,6 +89,7 @@ public class ShowCardScreen extends AppCompatActivity {
             public void onClick(View v) {
                 //Storage.getInstance().removeCard(card);
                 listEntry.getChildren().remove(cardIndex);
+                listEntry.getCardAdapter().notifyDataSetChanged();
                 finish();
             }
         });
