@@ -2,11 +2,13 @@ package com.example.pk.minitrello.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.models.Board;
@@ -50,11 +52,16 @@ public class ShowCardScreen extends AppCompatActivity {
     public void initComponents(){
         commentList = new ArrayList<Comment>();
         commentAdapter = new CommentAdapter(ShowCardScreen.this, R.layout.comment_cell, commentList);
+        cardListView = (ListView) findViewById(R.id.board_list);
+        cardListView.setAdapter(commentAdapter);
         TextView commentBoardName = (TextView) findViewById(R.id.card_name);
         TextView commentBoardDesc = (TextView) findViewById(R.id.card_desc);
         boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
+        Log.e("ShowCardScreen BIndex",boardIndex+"");
         entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
+        Log.e("ShowCardScreen EIndex",entryIndex+"");
         cardIndex = (Integer) getIntent().getSerializableExtra("cardIndex");
+        Log.e("ShowCardScreen CIndex",cardIndex+"");
         board = Storage.getInstance().getBoard(boardIndex);
         listEntry = board.getChildren().get(entryIndex);
         card = listEntry.getChildren().get(cardIndex);
@@ -65,14 +72,24 @@ public class ShowCardScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editText = (EditText) findViewById(R.id.add_comment_edittext);
-                Storage.getInstance().addComment(new Comment(editText.toString(),null));
+                if(!editText.getText().toString().equals("")) {
+                    card.add(new Comment(editText.getText().toString(),null ));
+                    editText.setText("");
+                    refreshCard();
+                    Log.e("Add coment buton", "card list size " + card.getChildren().size());
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Please type some text.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         deleteCurrentCardButton = (Button) findViewById(R.id.delete_current_button);
         deleteCurrentCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Storage.getInstance().removeCard(card);
+                //Storage.getInstance().removeCard(card);
+                listEntry.getChildren().remove(cardIndex);
+                finish();
             }
         });
     }
