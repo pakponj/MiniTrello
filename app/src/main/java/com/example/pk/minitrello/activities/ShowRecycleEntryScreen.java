@@ -1,15 +1,21 @@
 package com.example.pk.minitrello.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pk.minitrello.R;
 import com.example.pk.minitrello.models.Board;
@@ -63,10 +69,94 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
 
-        TextView entryBoardName = (TextView) findViewById(R.id.show_recycle_board_name);
-        TextView entryBoardDesc = (TextView) findViewById(R.id.show_recycle_board_desc);
+        final TextView entryBoardName = (TextView) findViewById(R.id.show_recycle_board_name);
+        final TextView entryBoardDesc = (TextView) findViewById(R.id.show_recycle_board_desc);
         entryBoardName.setText(board.getName());
+        entryBoardName.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.e("LISTENING", "EntryBoardName is clicked.");
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowRecycleEntryScreen.this);
+                alertDialog.setTitle("Editing Board's Name");
+                alertDialog.setMessage("Please enter a new board name: ");
+                final EditText input = new EditText(ShowRecycleEntryScreen.this);
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("OK", null);
+
+                final TextView thisEntryBoardName = entryBoardName;
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
+
+                final AlertDialog setEditDialog = alertDialog.create();
+                setEditDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        Button b = setEditDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (input.getText().toString().length() == 0) {
+                                    Toast.makeText(getApplicationContext(), "Enter new name", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    thisEntryBoardName.setText(input.getText().toString());
+                                    ShowRecycleEntryScreen.this.getWindow().getDecorView().postInvalidate();
+                                    setEditDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                });
+                setEditDialog.show();
+                return false;
+            }
+        });
         entryBoardDesc.setText(board.getDesc());
+        entryBoardDesc.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.e("LISTENING", "EntryBoardDesc is clicked.");
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowRecycleEntryScreen.this);
+                alertDialog.setTitle("Editing Board's Description");
+                alertDialog.setMessage("Please enter a new board description: ");
+                final EditText input = new EditText(ShowRecycleEntryScreen.this);
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("OK", null);
+
+                final TextView thisEntryBoardDesc = entryBoardDesc;
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
+
+                final AlertDialog setEditDialog = alertDialog.create();
+                setEditDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        Button b = setEditDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(input.getText().toString().length() == 0) Toast.makeText(getApplicationContext(), "Enter new name", Toast.LENGTH_SHORT).show();
+                                else {
+                                    thisEntryBoardDesc.setText(input.getText().toString());
+                                    ShowRecycleEntryScreen.this.getWindow().getDecorView().postInvalidate();
+                                    setEditDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                });
+                setEditDialog.show();
+                return false;
+            }
+        });
         Button delButton = (Button) findViewById(R.id.delete_current_button);
         delButton.setOnClickListener(new View.OnClickListener() {
             @Override
