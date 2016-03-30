@@ -1,11 +1,14 @@
 package com.example.pk.minitrello.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,8 +57,8 @@ public class ShowCardScreen extends AppCompatActivity {
         commentAdapter = new CommentAdapter(ShowCardScreen.this, R.layout.comment_cell, commentList);
         cardListView = (ListView) findViewById(R.id.board_list);
         cardListView.setAdapter(commentAdapter);
-        TextView commentBoardName = (TextView) findViewById(R.id.card_name);
-        TextView commentBoardDesc = (TextView) findViewById(R.id.card_desc);
+        final TextView commentBoardName = (TextView) findViewById(R.id.card_name);
+        final TextView commentBoardDesc = (TextView) findViewById(R.id.card_desc);
         boardIndex = (Integer) getIntent().getSerializableExtra("boardIndex");
         Log.e("ShowCardScreen BIndex",boardIndex+"");
         entryIndex = (Integer) getIntent().getSerializableExtra("entryIndex");
@@ -66,9 +69,48 @@ public class ShowCardScreen extends AppCompatActivity {
         listEntry = board.getChildren().get(entryIndex);
         card = listEntry.getChildren().get(cardIndex);
         commentBoardName.setText(card.getName());
+        commentBoardName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("LISTENING", "Card's name: " + commentBoardName.getText().toString() + " is clicked.");
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowCardScreen.this);
+                alertDialog.setTitle("Editing Card's name");
+                alertDialog.setMessage("Please enter an new card description: ");
+                final EditText input = new EditText(ShowCardScreen.this);
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("OK", null);
+
+                final TextView thisCommentBoardname = commentBoardName;
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
+
+                final AlertDialog setEditDialog = alertDialog.create();
+                setEditDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        Button b = setEditDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(input.getText().toString().length() == 0) Toast.makeText(getApplicationContext(), "Enter new name", Toast.LENGTH_SHORT).show();
+                                else {
+                                    card.setName(input.getText().toString());
+                                    thisCommentBoardname.setText(input.getText().toString());
+                                    ShowCardScreen.this.getWindow().getDecorView().postInvalidate();
+                                    setEditDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                });
+                setEditDialog.show();
+            }
+        });
         commentBoardDesc.setText(card.getDesc());
-//        commentBoardName.setText(listEntry.getName());
-//        commentBoardDesc.setText(listEntry.getDesc());
         addCommentButton = (Button) findViewById(R.id.add_comment_button);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override

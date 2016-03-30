@@ -54,8 +54,22 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
         ListEntry entry = entries.get(position);
         holder.subject.setText(entry.getName());
         holder.body.setText(entry.getDesc());
-
+        holder.listView.setAdapter(entry.getCardAdapter());
     }
+
+//    @Override
+//    public void onViewAttachedToWindow(ListEntryViewHolder holder) {
+//        super.onViewAttachedToWindow(holder);
+//        this.
+//        for(ListEntry le: entries) {
+//            CardAdapter cardAdapter = le.getCardAdapter();
+//            if(cardAdapter == null) {
+//                cardAdapter = new CardAdapter(activity, R.layout.card_cell, le.getChildren());
+//                le.setCardAdapter(cardAdapter);
+//            }
+//            cardAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     @Override
     public int getItemCount() {
@@ -166,18 +180,19 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
             listView = (ListView) itemView.findViewById(R.id.card_list_view);
             button = (Button) itemView.findViewById(R.id.add_card_button);
 
-            button.setOnClickListener(new View.OnClickListener(){
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     entryIndex = getLayoutPosition();
                     Board temp = Storage.getInstance().getBoard(boardIndex);
                     ListEntry le = temp.getChildren().get(entryIndex);
-                    if(le.getCardAdapter() == null) le.setCardAdapter(new CardAdapter(activity, R.layout.card_cell,le.getChildren()));
+                    if (le.getCardAdapter() == null)
+                        le.setCardAdapter(new CardAdapter(activity, R.layout.card_cell, le.getChildren()));
                     listView.setAdapter(le.getCardAdapter());
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(activity,ShowCardScreen.class);
+                            Intent intent = new Intent(activity, ShowCardScreen.class);
                             intent.putExtra("boardIndex", boardIndex);
                             intent.putExtra("entryIndex", entryIndex);
                             intent.putExtra("cardIndex", position);
@@ -186,8 +201,8 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
                     });
                     Log.e("Add card", "Add button clicked on entry@" + entryIndex);
                     Intent intent = new Intent(activity, CreateCardScreen.class);
-                    intent.putExtra("boardIndex",boardIndex);
-                    intent.putExtra("entryIndex",entryIndex);
+                    intent.putExtra("boardIndex", boardIndex);
+                    intent.putExtra("entryIndex", entryIndex);
                     activity.startActivity(intent);
                 }
             });
@@ -222,4 +237,5 @@ public class ListEntryRecyclerViewAdapter extends RecyclerView.Adapter<ListEntry
     public void refreshCards() {
 
     }
+
 }

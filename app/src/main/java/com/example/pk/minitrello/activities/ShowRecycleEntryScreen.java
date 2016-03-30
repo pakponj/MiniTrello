@@ -34,6 +34,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
     private CardRecycleViewAdapter cardRecycleViewAdapter;
     private int boardIndex;
     private Board board;
+    private List<ListEntry> entries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<ListEntry> entries = board.getChildren();
+        entries = board.getChildren();
         adapter = new ListEntryRecyclerViewAdapter(entries, this , boardIndex  );
         Storage.getInstance().setListEntryRecyclerViewAdapter(adapter);
         recyclerView.setAdapter(adapter);
@@ -185,6 +186,23 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        refreshCards();
+    }
+
+    /*private void refreshCards() {
+        for(ListEntry le: entries) {
+            CardAdapter cardAdapter = le.getCardAdapter();
+            if(cardAdapter == null) {
+                cardAdapter = new CardAdapter(ShowRecycleEntryScreen.this, R.layout.card_cell, le.getChildren());
+                le.setCardAdapter(cardAdapter);
+            }
+            cardAdapter.notifyDataSetChanged();
+        }
+    }*/
 
     private void refreshDeleteAll() {
         Board board = Storage.getInstance().getBoard(boardIndex);

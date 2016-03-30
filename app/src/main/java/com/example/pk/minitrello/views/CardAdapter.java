@@ -27,8 +27,8 @@ public class CardAdapter extends ArrayAdapter<Card> {
             v = vi.inflate(R.layout.card_cell, null);
         }
 
-        TextView subject = (TextView) v.findViewById(R.id.subject);
-        TextView body = (TextView) v.findViewById(R.id.body);
+        final TextView subject = (TextView) v.findViewById(R.id.subject);
+        final TextView body = (TextView) v.findViewById(R.id.body);
 
         Card card = getItem(position);
         subject.setText(card.getName());
