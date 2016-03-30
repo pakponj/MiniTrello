@@ -103,6 +103,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
                                 if (input.getText().toString().length() == 0) {
                                     Toast.makeText(getApplicationContext(), "Enter new name", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    board.setName(input.getText().toString());
                                     thisEntryBoardName.setText(input.getText().toString());
                                     ShowRecycleEntryScreen.this.getWindow().getDecorView().postInvalidate();
                                     setEditDialog.dismiss();
@@ -145,6 +146,7 @@ public class ShowRecycleEntryScreen extends AppCompatActivity {
                             public void onClick(View v) {
                                 if(input.getText().toString().length() == 0) Toast.makeText(getApplicationContext(), "Enter new name", Toast.LENGTH_SHORT).show();
                                 else {
+                                    board.setDesc(input.getText().toString());
                                     thisEntryBoardDesc.setText(input.getText().toString());
                                     ShowRecycleEntryScreen.this.getWindow().getDecorView().postInvalidate();
                                     setEditDialog.dismiss();

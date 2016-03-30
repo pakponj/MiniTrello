@@ -65,8 +65,10 @@ public class ShowCardScreen extends AppCompatActivity {
         board = Storage.getInstance().getBoard(boardIndex);
         listEntry = board.getChildren().get(entryIndex);
         card = listEntry.getChildren().get(cardIndex);
-        commentBoardName.setText(listEntry.getName());
-        commentBoardDesc.setText(listEntry.getDesc());
+        commentBoardName.setText(card.getName());
+        commentBoardDesc.setText(card.getDesc());
+//        commentBoardName.setText(listEntry.getName());
+//        commentBoardDesc.setText(listEntry.getDesc());
         addCommentButton = (Button) findViewById(R.id.add_comment_button);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
